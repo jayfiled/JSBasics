@@ -124,11 +124,11 @@ console.log(square(2)); //log is a function of the console object, so we can pas
 
 //javascript operators
     // Operators, Variables + expressions = algorithms
-*/
+
     //Arithmetic
 let x = 10;
 let y = 3;
-/*
+
 console.log(x + y); // x + y is an 'expression' it is something that produces a value
 console.log(x - y);
 console.log(x * y);
@@ -900,8 +900,8 @@ console.log(calculateGrade(array));
     }
 
     showStars(5);
-*/
-/* ***Comprehension failure: *** 
+
+ ***Comprehension failure: *** 
 Q. I can't understand why the 'pattern' variable under the first
 'for' loop doesn't get reset to an empty string every time it is looped over.
 
@@ -1171,9 +1171,84 @@ new Number(); // 1, 2, 3 ... (Number literals)
 // that object
 
 
-*/
+
 
 // Functions are OBJECTS
+
+// 1. Explaining what happens under the hood when you create an object using the 
+// constructor function:
+function Circle(radius) {
+    this.radius = radius;
+    this.draw = function() {
+        console.log('draw');
+    }
+}
+
+const another = new Circle(1);
+
+// For the example above, you can see by typing:
+
+    // 'Circle.' and seeing the list of properties and methods associated with the function (object)
+    // Tip: 'Circle.length' is the amount of arguments
+    // If you type 'Circle.constructor' it wll return the reference to the function used to create itself
+
+// You can recreate the function that created the Circle function (object) like so:
+
+const Circle1 = new Function('radius', `
+this.radius = radius;
+this.draw = function() {
+    console.log('draw');
+}
+`);
+    // the 'new Circle' function has a parameter, so it is added first as 
+    // a an argument in a string.
+    // the second argument is the object the new Circle function returns.
+    // it is wrapped in backticks so that it can be written across multiple lines
+    // -- it is neater to look at.
+
+const circle = new Circle1(1); // returns the circle object
+
+// 2. explaining 'this' a bit more:
+
+function Circle(radius) {
+    this.radius = radius;
+    this.draw = function() {
+        console.log('draw');
+    }
+}
+
+// if you have a look at what functions the Circle function (object) has:
+// Circle.call()
+// Circle.bind()
+
+// this. in the Circle constructor function will reference whatever is passed
+// into the object Circle.call({here})
+// then the arguments are passed explicitly: Circle.call({here}, 1, 2, 3) etc
+
+// So, this expression: Circle.call({}, 1);
+
+// is exactly like:
+
+new Circle(1);
+// when we use the 'new' operator, the 'new' operator will internally create an
+// empty object and pass it as the first argument to the 'call()' method.
+// and this object will determine the context for 'this.'
+// this.  will reference the empty object in the call method
+
+// note: if you don't use the 'new' keyword, window is passed as the first argument
+// instead of the object.
+
+// You can do the same thing, but if you need to pass an array as the second
+// argument, you use the apply() method, i.e. 
+// Circle.apply({}, [1, 2, 3]) // where you reference the array as the second arg
+
+Takeaway: All functions are objects :-)
+
+*/
+
+// Value vs Reference Types
+
+
 
 
 
