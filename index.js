@@ -1244,9 +1244,91 @@ new Circle(1);
 
 Takeaway: All functions are objects :-)
 
-*/
 
-// Value vs Reference Types
+// Value vs Reference Types - how they differ
+
+        // Value (Primitives)
+            // Number, String, Boolean, Symbol (ES6), undefined, null
+        //Reference Types
+            // Object, Function, Array
+
+            // 1. Value (Primitives)
+
+    // x and y are two independant variables
+    let x = 10; // 10 is stored in the x variable 
+    let y = x; // the value of x is *copied* into the new variable 'y' - they are completely independant
+
+    x = 20;
+
+console.log(x); // returns 20
+console.log(y); // returns 10
+
+            // 2. Reference Types
+let x = { value: 10 } // when we use an object, the object isn't stored in the variable.
+let y = x;            // It's stored in memory (behind the scenes), and the address in memory is stored
+                      // inside the the variable x.
+// so when you copy x into x, it's the address that's copied, so any changes are immediately visible
+// to the other variable
+x.value = 20;
+
+console.log(x); // returns the object { value: 20 }
+console.log(y); // returns the same object { value: 20 }
+
+// Takeaway: *Primitives* are copied by their value, *objects* are copied by their reference
+
+// One more Primitive example:
+    let number = 10;
+
+    function increase(number) { // the number variable is copied to the number in the parameter
+        number++; // 10 is incremented to 11 inside the scope, then when the function ends, it is 10 again
+    }
+
+    increase(number);
+    console.log(number);
+
+
+// One more object example:
+
+let obj = { value: 10 };
+
+function increase(obj) {
+    obj.value++;
+}
+
+increase(obj);
+console.log(obj); // Outputs { value: 11 } as the reference to the object is passed in to the parameter
+
+
+
+// Enumerating Properties of an Object
+*/
+const circle = {
+    radius: 1,
+    draw() {
+        console.log('draw');
+    }
+};
+
+for (let key in circle)
+console.log(key, circle[key]);
+
+// for (let key of circle)
+//     console.log(key); // Uncaught TypeError: circle is not iterable
+    // for-of loops can only be used on iterable items (like arrays)
+
+// you can use the built-in method on the Object object to do it
+for (let key of Object.keys(circle)) // gets all the keys in the object and returns an array - arrays are iterable
+console.log(key);
+
+// one more similar method is:
+
+for (let entry of Object.entries(circle)) // returns an array with the key value pair. The first element is
+console.log(entry);                 // the key and the second element is the value.
+
+// Check if a given object has a given property or a given method
+
+if ('radius' in circle) console.log('yes');
+
 
 
 
