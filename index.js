@@ -1301,7 +1301,7 @@ console.log(obj); // Outputs { value: 11 } as the reference to the object is pas
 
 
 // Enumerating Properties of an Object
-*/
+
 const circle = {
     radius: 1,
     draw() {
@@ -1310,24 +1310,135 @@ const circle = {
 };
 
 for (let key in circle)
-console.log(key, circle[key]);
+console.log(key, circle[key]); // returns: radius 1
+                              // draw function
 
 // for (let key of circle)
 //     console.log(key); // Uncaught TypeError: circle is not iterable
     // for-of loops can only be used on iterable items (like arrays)
 
 // you can use the built-in method on the Object object to do it
-for (let key of Object.keys(circle)) // gets all the keys in the object and returns an array - arrays are iterable
-console.log(key);
+for (let key of Object.keys(circle)) // object.key() gets all the keys in the object and returns an array *** to the FOR loop *** - arrays are iterable
+console.log(key); // returns: radius
+                            // draw
 
 // one more similar method is:
 
-for (let entry of Object.entries(circle)) // returns an array with the key value pair. The first element is
-console.log(entry);                 // the key and the second element is the value.
+for (let entry of Object.entries(circle)) // returns an array on each iteration with the key value pair. The first element is
+console.log(entry);                 // the key and the second element is the value. So this will return TWO arrays. One with ['radius', 1] the
+                                    // the other with ['draw', 'f draw()']
 
-// Check if a given object has a given property or a given method
+// Check if a property or method exists in a given object:
 
 if ('radius' in circle) console.log('yes');
+
+
+    // Cloning an object
+        // There are 3 ways;
+
+    const circle = {
+        radius: 1,
+        draw() {
+            console.log('draw');
+        }
+    };
+
+    // 1. Create another empty object and use a for loop to enumerate over and copy into new obj
+    
+    // const another = {};
+    // for (let key in circle)
+    // another[key] = circle[key]; // same as saying another['radius'] = circle['radius'];
+    // console.log(another); 
+
+    // 2. Use the Object.assign() method - clone or clone AND **combine** objects
+
+    const another = Object.assign({}, circle); //pass in the target object first then the source.
+    console.log(another);
+
+        // 2.1 // the first argument doesn't need to be an empty object, i.e.
+            const another = Object.assign({
+                color: 'yellow'
+            }, circle)
+            console.log(another); // outputs: {color: "yellow", radius: 1, draw: ƒ}
+
+    // 3. Use the spread operator
+        // Takes all the properties and methods and puts into another object.
+
+    const another = { ...circle };
+    console.log(another); // outputs the same as the circle object
+
+    // Garbage collection
+            // About when creating objects some languages you have to allocate memory and deallocate memory.  This is true for 
+            // low level languages like C or C++
+            // ** There is no such concept in JS - it is done automatically by the JS engine - called the garbage collector**
+                // Takes the variable and constants that are no longer used and deallocates the memory allocated to them
+
+
+            // Built in Objects in JS ** Use for reference: https://developer.mozilla.com
+    // 1. Math
+            // Return a random number between the specified values
+    
+        function getRandomBet(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        console.log(getRandomBet(15, 20));
+
+      console.log(Math.round(1.9)); // Returns the rounded up number
+
+      console.log(Math.max(1,2,3,4,5)); // Returns the highest number
+
+      console.log(Math.min(1,2,3,4)) //Returns the smallest number
+
+
+      // 2. String
+        // when you use the sting with dot notation, the JS engine - internally - 
+        // wraps string primitives in string objects so you can access their methods and properties
+
+    // String primitive
+      const message = 'hi';
+
+      // message.   <-- when you use dot notation, the primitive is wrapped in an object so you can access properties etc.
+    
+      // String object
+      const another = new String('hi');
+*/
+
+        const message = 'this is my first message';
+        console.log(message.length); // Gets the length of the stinrg - Outputs 24
+
+        console.log(message[0]); // Gets the char at index 0 - Outputs 'T'
+
+        console.log(message.includes('my')); // Method that takes a string as an argument and returns true or false if it is inside the string
+
+        console.log(message.startsWith('T')); // Method that takes a string and returns true or fase if it matches the first letter (case sensitive)
+
+        console.log(message.endsWith('e'));
+
+        console.log(message.indexOf('my')); // Returns 8 
+
+        console.log(message.replace('first', 'second')); // Method that returns a new string that replaces the value
+                                                         // of the first arg with the val of the second argument
+        console.log(message.toUpperCase());
+
+        const another = ' this is a message with spaces ';
+
+        console.log(another.trim()); // Trims the white space before and after a string - trimLeft() and trimRight() also exist
+
+    // Escape Notation:
+        // '\ for quotes
+        const notation = 'This is my \'first message ';
+        console.log(notation);
+
+        // \n  <---- adds a new line.
+
+        console.log(message.split(' '));
+
+
+
+
+
+
 
 
 
