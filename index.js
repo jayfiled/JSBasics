@@ -1402,7 +1402,7 @@ if ('radius' in circle) console.log('yes');
     
       // String object
       const another = new String('hi');
-*/
+
 
         const message = 'this is my first message';
         console.log(message.length); // Gets the length of the stinrg - Outputs 24
@@ -1432,7 +1432,55 @@ if ('radius' in circle) console.log('yes');
 
         // \n  <---- adds a new line.
 
-        console.log(message.split(' '));
+        console.log(message.split(' ')); // splits the string into an array at the point based on the argument we gave it.
+        // ouputs ['this', 'is', 'my', 'first', 'message'] <-- the string was broken down based on the spaces.
+
+
+        // Template literals
+            // This solves the problem like the above \n escaping to make a new line - it looks messy - you can't visualise
+            // what the output looks like.
+                // Best practices are to make the code something like the output.
+        // 1. this way is possible, but it still isn't ideal
+            const message = 
+            'this is my\n' +
+            'first message';
+
+        // Types of 'literals' in JS:
+            // Object {}
+            // Boolean: true, false
+            // String: '', ""
+            // -- From ES6 -- Template: ``
+
+        // 2.
+        const another = `This is my
+        'first' message`; // format it the way you want it to look
+
+        // Handy when you want to send out emails.
+
+        // Previous to ES6 - 
+        const name = 'John'
+        const message = 'Hi ' + name + ',\n'; // getting unreadable
+        
+        // Now, using placeholders: ${}
+        // 3. lets, const, mathematical operators etc are all accepted - any expression or function that returns or references a value
+        const another =
+        `Hi ${name} ${2 + 3},
+        Thank you for joining my mailing list.
+        Regards,
+        Joel
+        `
+*/
+        // Date
+            // There are different type of date objects - when you open the parenthesis you can see the types.  See MDN for more info
+        const now = new Date();
+        const date1 = new Date('May')
+
+
+
+
+        
+
+
 
 
 
