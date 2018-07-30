@@ -1469,16 +1469,112 @@ if ('radius' in circle) console.log('yes');
         Regards,
         Joel
         `
-*/
+
         // Date
             // There are different type of date objects - when you open the parenthesis you can see the types.  See MDN for more info
-        const now = new Date();
-        const date1 = new Date('May')
+        const now = new Date(); // Note the returned values **aren't strings**
+        const date1 = new Date('May 11 2018 09:00');
+        const date2 = new Date(2018, 4, 11, 9); // TIP: Months are counted like array indices, i.e. Jan = 0, Feb = 1 etc
+
+        // There are a bunch of methods
+
+        now.getDay(); // Gets the day of the month
+        now.getFullYear(); // Gets the year etc
+
+        // set methods
+        now.setFullYear(2017);
+
+        // how to convert them to a string and display on the console
+
+        now.toDateString(); // Returns today's date, but for 2017 (because we set the date to 2017 in a previous method)
+        now.toTimeString(); // Returns the time component
+        now.toISOString(); // Common way to transfer date between the client and the server
 
 
 
+// **** Object Exercises **** //
 
+// 1. Create an address object with three properties.
+        // a. street
+        // b. city
+        // c. zipCode
+        // Create a function called showAddress(address) that takes the object and shows all the properties in the object
+        // along with their value.
+
+// My effort:
+const streetObj = {
+    street: 35,
+    streetName: 'Elizabeth',
+    city: 'Melbourne',
+    postCode: 3000
+};
+
+function showAddress(address) {
+    for (let key in address)
+    console.log(key, address[key]);
+}
+
+showAddress(streetObj);
+
+
+
+// 2. Initialize an address object using:
+    //  a. a factory function and then
+    //  b. a constructor function
+
+  // My effort:  // a.
+function showAddress(streetNumber, streetName, city, postCode) {
+    return {
+        streetNumber,
+        streetName,
+        city,
+        postCode
+    }
+};
+
+console.log(showAddress(37,'Elizabeth', 'Melbourne', 3000));
+
+
+//b.
+
+function ShowAddress(streetNumber, streetName, city, postCode) {
+    this.streetNumber = streetNumber,
+    this.streetName = streetName,
+    this.city = city,
+    this.postCode = postCode
+}
+
+const address = new ShowAddress(12, 'Pinkburton', 'Maui', 90210);
+
+console.log(address);
+*/
+// Exercise 3
+
+    // Object Equality
+
+    // Use the constructor function you used in the previous exercise to creat two address objects
+    // Create two functions to check to see if the objects passed in are equal
+        // Objects are reference types - check that all the properties are equal, it should return true
+    // If address address 1 and address two are point to the exact same object return true, if not return false
+
+    function ShowAddress(streetNumber, streetName, city, postCode) {
+        this.streetNumber = streetNumber,
+        this.streetName = streetName,
+        this.city = city,
+        this.postCode = postCode
+    }
+
+    let address1 = new ShowAddress('a', 'b', 'c', 'd');
+    let address2 = new ShowAddress('a', 'b', 'c', 'd');
+
+    function areEqual(address1, address2) {
+
+    }
+
+    function areSame(address1, address2) {
         
+    }
+
 
 
 
