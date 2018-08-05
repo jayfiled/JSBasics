@@ -1547,16 +1547,17 @@ function ShowAddress(streetNumber, streetName, city, postCode) {
 const address = new ShowAddress(12, 'Pinkburton', 'Maui', 90210);
 
 console.log(address);
-*/
+
 // Exercise 3
 
     // Object Equality
 
-    // Use the constructor function you used in the previous exercise to creat two address objects
+    // Use the constructor function you used in the previous exercise to create two address objects
     // Create two functions to check to see if the objects passed in are equal
         // Objects are reference types - check that all the properties are equal, it should return true
-    // If address address 1 and address two are point to the exact same object return true, if not return false
+    // If address address 1 and address two are pointing to the exact same object return true, if not return false
 
+    // Exercise Setup
     function ShowAddress(streetNumber, streetName, city, postCode) {
         this.streetNumber = streetNumber,
         this.streetName = streetName,
@@ -1575,8 +1576,74 @@ console.log(address);
         
     }
 
+    // My effort
 
+    function ShowAddress(streetNumber, streetName, city, postCode) {
+        this.streetNumber = streetNumber,
+        this.streetName = streetName,
+        this.city = city,
+        this.postCode = postCode
+    }
 
+    let address1 = new ShowAddress('a', 'b', 'c', 'd');
+    let address2 = new ShowAddress('a', 'b', 'c', 'd');
+
+    function areEqual(address1, address2) {
+        const addr1 = Object.keys(address1);
+        const addr2 = Object.keys(address2)
+
+        console.log(addr1);
+
+        let equal = -1;
+
+        for (let i = 0; i >= addr1.length; i++) {
+            if (addr1[i] === addr2[i])
+            equal =+ 1;
+            console.log(equal);
+        }
+        equal === addr1.length ? console.log(equal) : console.log(false);
+    }
+
+    //areEqual(address1, address2);
+
+    function areSame(address1, address2) {
+        return address1 === address2 ? true : false;
+    }
+
+    console.log(areSame(address1, address2));
+*/
+// Refactor
+
+function ShowAddress(streetNumber, streetName, city, postCode) {
+    this.streetNumber = streetNumber,
+    this.streetName = streetName,
+    this.city = city,
+    this.postCode = postCode
+}
+
+let address1 = new ShowAddress('a', 'b', 'c', 'd');
+let address2 = new ShowAddress('a', 'b', 'c', 'd');
+let address3 = address1;
+
+function areEqual(address1, address2) {
+    return address1.streetNumber === address2.streetNumber &&
+    address1.streetName === address2.streetName &&
+    address1.city === address2.city &&
+    address1.postCode === address2.postCode;
+}
+
+console.log(areEqual(address1, address2)); // returns true as the values are the same
+
+function areSame(address1, address2) {
+    return address1 === address2;
+}
+
+console.log(areSame(address1, address2)); // returns false as they are referencing different objects in memory
+
+console.log(areSame(address1, address3)); // returns true as address3 is referencing the same object in memory
+
+// Takeaway - the instructions should have said to check that the VALUEs of the properties are the same,
+// not the properties.  I read that I should have checked the property names.. i.e. the 'keys'
 
 
 
