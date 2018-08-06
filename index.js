@@ -1548,7 +1548,7 @@ const address = new ShowAddress(12, 'Pinkburton', 'Maui', 90210);
 
 console.log(address);
 
-// Exercise 3
+// Objects - Exercise 2
 
     // Object Equality
 
@@ -1611,7 +1611,7 @@ console.log(address);
     }
 
     console.log(areSame(address1, address2));
-*/
+
 // Refactor
 
 function ShowAddress(streetNumber, streetName, city, postCode) {
@@ -1647,6 +1647,39 @@ console.log(areSame(address1, address3)); // returns true as address3 is referen
 
 
 
+// Objects - Exercise 3
+    // Create a blog post object with these properties:
+        // Use object literal syntax to create and ititialize a blog post.
+
+    // title
+    // body
+    // author
+    // views
+    // comments 
+    //      (author, body)
+    // isLive
+
+    // my effort
+let blogPost = {
+    title: 'Feeling good',
+    body: 'Lorem Ipsum',
+    author: 'Mr Miyagi',
+    views: 10,
+    comments: [
+        {author: 'Mr Kid', body: 'Ipsum Lorem'},
+        {author: 'Mr Schwartznegger', body: 'You\'ll be back!'}
+    ],
+    isLive: true
+};
+
+console.log(blogPost);
+
+*/
+
+// Objects - Exercise 4
+    // Use a constructor function to create a blog post function
+        // Imagine you are building a blogging engine, the user is drafting a post, but they have not yet published it
+    // Build what you think the constructor function should look like.
 
 
 
