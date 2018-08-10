@@ -1677,10 +1677,24 @@ console.log(blogPost);
 */
 
 // Objects - Exercise 4
-    // Use a constructor function to create a blog post function
+    // Use a constructor function to create a blog post object
         // Imagine you are building a blogging engine, the user is drafting a post, but they have not yet published it
     // Build what you think the constructor function should look like.
 
+
+function BlogPost(title, body, author, views, comments, isLive) {
+    this.title = title,
+    this.body = body,
+    this.author = author,
+    this.views = views,
+    this.comments = comments,
+    this.isLive = isLive
+}
+
+blogPost1 = new BlogPost('dot net', 'dev environment, boo', 'Joel', 10, [
+    {name: 'Jim', body: 'I hear ya'},
+    {name: 'Rob', body: 'I believe ya'}
+], false);
 
 
 
