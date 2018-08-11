@@ -1674,14 +1674,14 @@ let blogPost = {
 
 console.log(blogPost);
 
-*/
+
 
 // Objects - Exercise 4
     // Use a constructor function to create a blog post object
         // Imagine you are building a blogging engine, the user is drafting a post, but they have not yet published it
     // Build what you think the constructor function should look like.
 
-
+//my effort
 function BlogPost(title, body, author, views, comments, isLive) {
     this.title = title,
     this.body = body,
@@ -1695,6 +1695,30 @@ blogPost1 = new BlogPost('dot net', 'dev environment, boo', 'Joel', 10, [
     {name: 'Jim', body: 'I hear ya'},
     {name: 'Rob', body: 'I believe ya'}
 ], false);
+
+//refactor
+
+function Post(title, body, author) { //no need for views, comments or isLive as they are all initialized to default values
+    this.title = title;
+    this.body = body;
+    this.views = 0;
+    this.comments = [];
+    this.isLive = false;
+}
+
+let post = new Post('a', 'b', 'c');
+
+console.log(post);
+
+// the fewer parameters the better
+
+*/
+
+// Exercise 5
+    // Think of the price range selector on a site like yelp.  Think of the properties an object like this would have
+    // there are 3 price range selectors - one with a single $, one with two $$ up to three $ signs.
+
+    // Create an array of objects.  Each object is called a 'Price Range object' 
 
 
 
