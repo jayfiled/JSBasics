@@ -1,4 +1,24 @@
 /*
+// --------- TOC --------- //
+
+// --------- BASICS --------- //
+
+// --------- OPERATORS --------- //
+
+// --------- CONTROL FLOW --------- //
+
+// --------- OBJECTS --------- //
+
+// --------- ARRAYS --------- //
+
+// --------- FUNCTIONS --------- //
+
+                        
+---------------------------------------------------------------|
+
+
+// --------- BASICS --------- //
+
 //Primitive types
 
 let name = 'Dave'; //string
@@ -120,7 +140,7 @@ console.log(number);
 console.log(square(2)); //log is a function of the console object, so we can pass
 // a string like 'hello' or a call to another function 
 
-
+// --------- Operators --------- //
 
 //javascript operators
     // Operators, Variables + expressions = algorithms
@@ -321,7 +341,7 @@ console.log(a);
 console.log(b);
 
 
-//** CONDITIONALS *** 
+// --------- CONTROL FLOW --------- //
 
     // IF / Else 
 
@@ -992,7 +1012,8 @@ for(let i=0, len=chars.length; i<len; i++){
 
 
 
-//OBJECTS
+// --------- OBJECTS --------- //
+
     // Object literals
 
 //instead of declaring seperately, highly related properties like:
@@ -1712,7 +1733,7 @@ console.log(post);
 
 // the fewer parameters the better
 
-*/
+
 
 // Exercise 5
     // Think of the price range selector on a site like yelp.  Think of the properties an object like this would have
@@ -1720,8 +1741,162 @@ console.log(post);
 
     // Create an array of objects.  Each object is called a 'Price Range object' 
 
+//my effort
+const priceRangeArr = [
+    {
+        name: 'cheapest',
+        priceMin: 0,
+        priceMax: 25,
+        onClick: function() {
+            //send the minimum and maximum values to the search function to display relevant results
+        }
+    },
+    {
+        name: 'medium',
+        priceMin: 26,
+        priceMax: 36,
+        onClick: function() {
+            //send the minimum and maximum values to the search function to display relevant results
+        }
+    },
+    {
+        name: 'expensive',
+        priceMin: 37,
+        priceMax: 100,
+        onClick: function() {
+            //send the minimum and maximum values to the search function to display relevant results
+        }
+    }
+];
+
+//refactor
+
+let priceRanges = [
+    { label: '$', tooltip: 'Cheap', minPerPerson: 0, maxPerPerson: 10 },
+    { label: '$$', tooltip: 'Moderate', minPerPerson: 11, maxPerPerson: 25 },
+    { label: '$$$', tooltip: 'Expensive', minPerPerson: 26, maxPerPerson: 50 }
+];
+
+// The min and max are used to filter out the restaurant objects which have an average between the min and max, like:
+
+let restaurants = [
+    { averagePerPerson: 5 }
+];
 
 
+
+// --------- ARRAYS --------- //
+    // Intro
+        // Learn about all different types of operations you can do on Arrays;
+            // Adding new elements
+                // Finding Elements
+                    // Removing Elements
+                        // Splitting arrays
+                            // Combining arrays
+
+
+// Adding Elements:
+
+
+
+const numbers = [3, 4];
+
+// numbers = []; // watch out for reassinging constant variables - you'll get an error but you can add and remove elements
+
+// End
+
+numbers.push(5,6);
+
+console.log(numbers); // returns [3, 4, 5, 6]
+
+// Beginning
+
+numbers.unshift(1,2);
+
+console.log(numbers); // returns [1, 2, 3, 4, 5, 6]
+
+// Middle
+    // splice - you can go to a given position and add new elements or remove new elements
+numbers.splice(2, 0, 'a', 'b') // param1 = start position (starts BEFORE the specified index element), param 2 = how many elememts
+// to delete, param 3 = the items you want to add.
+
+console.log(numbers); // returns [1, 2, 'a', 'b', 3, 4, 5, 6]
+
+
+
+// Finding Elements
+    // Differs based on if you are finding primitive types, or reference types.
+
+// Finding Primitive types:
+
+const numbers = [1, 2, 3, 1, 4];
+
+console.log(numbers.indexOf(1)); // returns the index of the argument.  -1 if it doesn't exist. '1' will be -1
+
+console.log(numbers.lastIndexOf(1)); // returns the index of the last element that matches the argument, i.e. 3
+
+// does it exist, true or false?
+
+console.log(numbers.indexOf(1) ==! -1); // returns true
+
+    // a newer, better way:
+console.log(numbers.includes(1)); // returns true if the given element exists in the array
+
+// all have a second parameter, which is optional which is the starting index, i.e:
+
+console.log(indexOf(1, 2)); // returns 3 which is the only element that matches the argument when we start the 
+                            // array at the 2nd index
+
+// Finding reference types:                          
+    // Slightly different that using primitive types
+const courses = [
+    {id: 1, name: 'a'},
+    {id: 2, name: 'b'}
+];
+
+console.log(courses.includes({id: 1, name: 'a'})); // false
+// because the object you are passing have the same values but it has a different reference, it has a different locations
+// in memory, two different unique IDs.
+
+// so we use the find method - use MSDN if the description in your IDE is too complicated
+
+const array1 = [5, 12, 8, 130, 44];
+
+const found = array1.find(function(element) { // as an agrument, we pass a function - predicate or 'call-back' function 
+    return element > 10;  // the function takes a parameter which is an element in the above array1 array.
+}); // return a boolean
+
+// What happens: the function is executed using once on the first element in the array, i.e. number 5 is passed
+// as the element, 5 is not greater than 10, so it won't be added to the 'found' array, and the next element is checked.
+// 12 is checked and it meets the condition and returns true and then stops checking.
+
+// undefined is returned if there are no elements that match.
+
+console.log(found); // output: 12
+
+//trying one more time on our course array:
+*/
+const courses = [
+    {id: 1, name: 'a'},
+    {id: 2, name: 'b'}
+];
+
+console.log(courses.find(function(course) {
+    return course.name === 'a';
+})); // outputs the full course object
+
+// if it can't find, then it outputs 'undefined'
+
+// if you want the index of a reference type:
+
+console.log(courses.findIndex(function(course) {
+    return course.name === 'a';
+})); // outputs 0 but -1 if it can't find it.
+
+
+    // Arrow Functions
+
+    
 
 
 
