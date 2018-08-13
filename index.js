@@ -1895,8 +1895,20 @@ console.log(courses.findIndex(function(course) {
 
 
     // Arrow Functions
+// ES6 way to make the above code cleaner with arrow functions
 
-    
+// Whenever you want to pass a callback function or as an argument to a different method:
+
+// 1. remove the word 'function'
+// 2. If it has a single parameter, remove the parenthesis
+// 3. If you don't have any parameters, you need to pass an empty parenthesis
+// 4. If your function is a single line of code and it is returning a value, remove the return keyword and curly
+// braces, put it all on one line.
+
+
+console.log(courses.findIndex(course => course.name === 'a'));
+
+
 
 
 
