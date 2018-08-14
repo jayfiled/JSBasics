@@ -1875,7 +1875,7 @@ const found = array1.find(function(element) { // as an agrument, we pass a funct
 console.log(found); // output: 12
 
 //trying one more time on our course array:
-*/
+
 const courses = [
     {id: 1, name: 'a'},
     {id: 2, name: 'b'}
@@ -1907,6 +1907,128 @@ console.log(courses.findIndex(function(course) {
 
 
 console.log(courses.findIndex(course => course.name === 'a'));
+
+// Removing Elements from an Array
+
+
+const numbers = [1, 2, 3, 4];
+
+// End
+const last = numbers.pop();// Removes the last element in the array and returns it, so save it to a constant
+console.log(numbers); // Outputs: [1, 2, 3]
+console.log(last); // Outputs: 4
+
+
+// Beginning
+const first = numbers.shift(); // Like pop, but it removes the first element and returns it
+console.log(numbers); // Outputs: [2, 3, 4]
+console.log(last); // Outputs 1
+
+// Middle
+numbers.splice(2, 2); // first argument is the index item of the element you want to delete, the next argument is
+console.log(numbers);    // the amount of items you want to remove
+         // Outputs: [1, 2] 
+
+
+
+    // Emptying an array - remove all elements
+
+    
+    let numbers = [1, 2, 3, 4];
+    let another = numbers; // for the garbage collection example below:
+
+// Solution 1
+
+numbers = []; // This will reinitialize the array to an empty array - it doesn't *empty* the array.
+
+console.log(numbers); // Outputs []
+// The issue with this is that if you have another variable referencing the numbers variable, it will still reference 
+// the original numbers array.  Because it is still sitting in memory, and will so until the JS garbage removal 
+// takes place, you can prove this by declaring another variable and pointing it to numbers, i.e.
+
+console.log(another); // Outputs [1, 2, 3, 4]
+
+// Solution 2
+
+numbers.length = 0; // Will truncate the existing numbers array to 0
+console.log(numbers); // Outputs: []
+console.log(another); // Outputs: []
+
+// Solution 3
+
+numbers.splice(0, numbers.length);
+// removes the elements starting at the 0th index and removes the same amount of elements that are in the array
+
+// Solution 4
+
+
+while (numbers.length > 0) {
+    numbers.pop();
+}
+
+console.log(numbers); // Outputs: []
+console.log(another); // Outputs: []
+// Not ideal as it needs to loop over every element in the array and will have a high performace cost the larger
+// the array
+
+// Takeaway: Solution 1 is less noisy than the rest, but solution 2 is preferred as you don't have  to worry
+// about re-assigning variables
+
+    // Combining and Slicing arrays
+
+    // Combine
+    const first = [1, 2, 3];
+    const second = [4, 5, 6];
+
+    const combined = first.concat(second); // Use concat to combine arrays, pass the second array in as an argument
+    console.log(combined); // to return them together
+
+    // Slice 
+// The slice() method selects the elements starting at the given start argument
+// and ends at, but does not include, the given end argument.
+
+    const slice = combined.slice(2, 4);
+    console.log(combined); // Outputs [3, 4]
+    console.log(slice);
+
+    // You can also use it like:
+    combined.slice(2); // Outputs: [3, 4, 5, 6] (everything after and including the first argument's indexed item)
+    combined.slice(); // Outputs the original array (copies it)
+
+// Extra info:
+    // When you combine and slice arrays, if they contain primitive types, they are copied
+    // If they contain objects, then the *references* are copied
+        // meaning the elements in the input array will reference the same object as the output (the returned) array
+    */
+
+    //i.e.
+
+    const first = [{ id: 1 }]; // Add a reference type
+    const second = [4, 5, 6];
+
+    const combined = first.concat(second); // Here the first array with an object with ID: 1 is combined with second
+    console.log(combined); // Check what 'combined' outputs: [{id: 1}, 4, 5, 6]
+
+    combined[0].id = 10; // Change the ID value in the object within the combine array
+    //first[0].id = 10;
+    console.log(first); // Because the object in the combine array is referencing the one in 'first', changing one
+                        // will change the other.  Single source.
+
+    // The spread oeprator
+        // ES6 way to do the above combine and slice
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
