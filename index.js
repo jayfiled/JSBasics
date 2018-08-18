@@ -1999,7 +1999,6 @@ console.log(another); // Outputs: []
     // When you combine and slice arrays, if they contain primitive types, they are copied
     // If they contain objects, then the *references* are copied
         // meaning the elements in the input array will reference the same object as the output (the returned) array
-    */
 
     //i.e.
 
@@ -2013,11 +2012,29 @@ console.log(another); // Outputs: []
     //first[0].id = 10;
     console.log(first); // Because the object in the combine array is referencing the one in 'first', changing one
                         // will change the other.  Single source.
-
-    // The spread oeprator
+ 
+    // The spread operator ... 
         // ES6 way to do the above combine and slice
 
+    const first = [1, 2, 3];
+    const second = [4, 5, 6];
 
+// const combined = first.concat(second);  
+    // spread version
+const combined = [ ...first, ...second]; // you declare a new array and add the individual elements of the first
+                                        // and second array
+
+// .. you can also add elements in between and at the end
+    [ ...first, 'a', ...second, 'b'];
+
+// with slice you can copy the array like: const copy = combined.slice();
+// with the spread operator:
+const copy = [...combined];
+   */
+
+    // Iterating an array
+
+    // for-of
 
 
 
