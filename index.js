@@ -2034,11 +2034,28 @@ const copy = [...combined];
 
     // Iterating an array
 
-    // for-of
+    // Use array loop - for-of
 
+    const numbers = [1, 2, 3];
 
+for (let number of numbers) // for each iteration, 'number' will be set to one number in the array 'numbers'
+console.log(number); // outputs 1, 2, 3
 
+// A similar way to do this is with the array method 'forEach'
 
+numbers.forEach(function(number) { // each element in the array 'numbers' will be passed as an argument to the callback
+    console.log(number);            // function on each iteration
+});
+
+// forEach refactored:
+
+numbers.forEach(number => console.log(number));
+
+    // tip - forEach's callback function, can optionally take a second parameter, which is the index of  the element
+    // i.e.
+numbers.forEach((number, index) => console.log(index, number)); // Outputs 0 1, 1 2, 2 3
+
+// note - you don't get the index with the 'for-of' loop - you need to use the 'for-in' loop for that.
 
 
 
