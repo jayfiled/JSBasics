@@ -2030,7 +2030,6 @@ const combined = [ ...first, ...second]; // you declare a new array and add the 
 // with slice you can copy the array like: const copy = combined.slice();
 // with the spread operator:
 const copy = [...combined];
-   */
 
     // Iterating an array
 
@@ -2056,6 +2055,80 @@ numbers.forEach(number => console.log(number));
 numbers.forEach((number, index) => console.log(index, number)); // Outputs 0 1, 1 2, 2 3
 
 // note - you don't get the index with the 'for-of' loop - you need to use the 'for-in' loop for that.
+
+
+   // Joining Arrays
+
+const numbers = [1, 2, 3];
+
+const joined = numbers.join(); // you can optionally pass a string, and it will be used as a seperator.  It also returns a string.
+console.log(joined); // Outputs: 1,2,3
+
+// .join goes hand in hand with .split (on a string object)
+
+const message = 'This is my first message';
+
+const parts = message.split(' '); // returns an array.
+console.log(parts); // Outputs [0: "this" 1: 'is] .. etc
+
+// now use the join method to combine the elements using a seperator
+
+const combined = parts.join('-');
+console.log(combined);
+
+// Useful when creating a URL slug.  This is when, for example an article is posted on a website and the title's 
+// white space is removed and dashes are added instead to use in the URL. i.e. 'My best mate' turns into: 
+// www.coolsite.com.au/my-best-mate.html
+
+    // Sorting Arrays
+
+    const numbers = [2, 3, 1];
+        // Nice and easy when you have numbers and strings in an array.
+    numbers.sort();
+    console.log(numbers); // Outputs [1, 2, 3]
+
+    numbers.reverse();
+    console.log(numbers); // Outputs [3, 2, 1]
+   */
+        // A little trickier when using objects
+    const courses = [
+        {id: 1, name: 'Node.js'},
+        {id: 2, name: 'javaScript'}
+    ];
+    courses.sort(); 
+    console.log(courses)// Out put is identical to the original array - it doesn't work.
+
+// to fix this, we can pass an optional function to the sort method as an argument.  This is used for comparison. 
+// In this case if we call the sort method, the method gets two objects and compares them.
+// If they are in the right order, it will skip to the next elements, otherwise it will re-arrange them
+
+courses.sort(function() {
+    // if a < b => -1  (return -1)
+    // if a > b => 1
+    // if a === b => 0
+
+    if (a.name < b.name) return -1; // no need to use the 'Else-if' because if the first statement is true, we will
+    if (a.name > b.name) return 1; // jump out of the function
+    return 0;
+})
+
+console.log(courses);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
 
 
 
