@@ -2093,28 +2093,59 @@ console.log(combined);
         // A little trickier when using objects
     const courses = [
         {id: 1, name: 'Node.js'},
-        {id: 2, name: 'javaScript'}
+        {id: 2, name: 'JavaScript'}
     ];
     courses.sort(); 
-    console.log(courses)// Out put is identical to the original array - it doesn't work.
+    console.log(courses)// Output is identical to the original array - it doesn't work.
 
 // to fix this, we can pass an optional function to the sort method as an argument.  This is used for comparison. 
 // In this case if we call the sort method, the method gets two objects and compares them.
 // If they are in the right order, it will skip to the next elements, otherwise it will re-arrange them
 
-courses.sort(function() {
-    // if a < b => -1  (return -1)
-    // if a > b => 1
+courses.sort(function(a, b) {
+    // if a < b => -1  (return -1) - meaning it is in the right order
+    // if a > b => 1 // if this returns it switches them
     // if a === b => 0
 
     if (a.name < b.name) return -1; // no need to use the 'Else-if' because if the first statement is true, we will
     if (a.name > b.name) return 1; // jump out of the function
     return 0;
-})
+});
 
-console.log(courses);
+console.log(courses); // Output: the courses array with the javascript object displaying first
 
+// However, the sort() method won't work if, for example the 'J' in javaScript is lower-case.
+// this is because the uppercase N in node, is 78 on the ASCII table, and lower case j is 106. 78 < 106, so it returns 1
+// in our function.
 
+// How to solve?
+// A. Exclude case-sensitivity when comparing the names in our callback function
+
+courses.sort(function(a, b) {
+    // if a < b => -1  (return -1) - meaning it is in the right order
+    // if a > b => 1 // if this returns it switches them
+    // if a === b => 0
+    const nameA = a.name.toUpperCase(); // or toLowerCase();
+    const nameB = b.name.toUpperCase(); // or toLowerCase();
+
+    if (nameA < nameB) return -1; // no need to use the 'Else-if' because if the first statement is true, we will
+    if (nameA > nameB) return 1; // jump out of the function
+    return 0;
+});
+
+    // Testing the elements of an Array
+        // every() and some() --- new JS, so not supported natively in old browsers ---
+
+const numbers = [1, 2, 3];
+// .every() checks every element against an expression to see if ALL of the elements meet a criteria
+const allPositive = numbers.every(function(value) {
+    return value >= 0; // if this expression returns true, the every method will return a boolean, otherwise false
+});     // it will also terminate on the first element that doesn't match the criteria in the expression.
+
+// .some() checks every element to see if at least one element matches a given criteria.
+const atLeastOnePositive = numbers.some(function(value) {
+    return value >= 0; // same deal, as soon as it finds an element that matches the expression, it returns true
+});
 
 
 
