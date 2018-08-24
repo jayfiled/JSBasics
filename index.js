@@ -2089,7 +2089,7 @@ console.log(combined);
 
     numbers.reverse();
     console.log(numbers); // Outputs [3, 2, 1]
-   */
+
         // A little trickier when using objects
     const courses = [
         {id: 1, name: 'Node.js'},
@@ -2149,6 +2149,42 @@ const atLeastOnePositive = numbers.some(function(value) {
 
 
 
+    // Filtering an Array
+        // Loops over each element in the array and performs a function on each element and returns a new array
+const numbers = [1, -1, 2, 3];
+
+const filtered = numbers.filter(function(value) {
+    return value >= 0;
+});
+
+console.log(filtered);
+
+// This expression is a good target for an arrow function.
+
+const filtered = numbers.filter(n => n >= 0 );
+
+// Possible exercise?
+
+// Most likely in a real world scenario, you'll use an array of objects.  For example an array with restaurants,
+// and they all have their opening hours as a property.
+// You can then filter the restaurants by whether they are open now or not.
+
+   */
+
+   // Mapping an Array
+    // You can map each item in an array to something else.
+
+    // Contstruct some HTML markup using the elements in this array:
+
+    const numbers = [1, -1, 2, 3];
+
+    const filtered = numbers.filter(n => n >= 0);
+
+    const items = filtered.map(n => '<li>' + n + '</li>');
+
+    const html = items.join('');
+
+        console.log(html);
 
 
 
