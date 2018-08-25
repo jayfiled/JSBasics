@@ -2169,27 +2169,111 @@ const filtered = numbers.filter(n => n >= 0 );
 // and they all have their opening hours as a property.
 // You can then filter the restaurants by whether they are open now or not.
 
-   */
 
    // Mapping an Array
-    // You can map each item in an array to something else.
+    // You can map each element in an array to something else.
 
-    // Contstruct some HTML markup using the elements in this array:
+    // Contstruct some HTML markup using the elements in this array: (map to strings)
 
     const numbers = [1, -1, 2, 3];
 
     const filtered = numbers.filter(n => n >= 0);
 
-    const items = filtered.map(n => '<li>' + n + '</li>');
+    const items = filtered.map(n => '<li>' + n + '</li>'); // Replace the element passed in as an argument to the 
+                                                            // callback function with what the cb function returns
 
-    const html = items.join('');
+    const html = '<ul>' + items.join('') + '</ul>'; // join the array with nothing, and return it.  
+                                                    // Changing the array to a string & concatenate some <ul> tags
+                                                    // as strings.
 
-        console.log(html);
+    console.log(html); // Outputs: <ul><li>1</li><li>2</li><li>3</li></ul>
+ 
+        // (map to objects)
+    const numbers = [1, -1, 2, 3];
 
+    const filtered = numbers.filter(n => n >= 0);
 
+    // const items = filtered.map(n => {
+    //     const obj = { value: n };
+    //     return obj;
+    // }); // returns an array of object with a values mapped from the filtered array          
 
+    // TIP: you can refactor the above callback function, but there is a trick when returning objects
 
+    const items = filtered.map(n => ({ value: n }) );
+                 // only have a single line of code and returning one value
+                 // so you don't need the const, return keyword or curly braces
+                 // BUT, here's the TIP, you need to wrap the object's curly braces in parenthesis
+                 // otherwise the JS engine will parse the object's curly braces as a code block & return undefined.
 
+    console.log(items);    
+
+        // TIP: these methods (filter, map, join etc) return arrays, so that means we can chain them together without
+        // having to store them to constants. So the above code would look like this:
+
+        const numbers = [1, -1, 2, 3];
+
+        // call a filter method, that method returns a result, then we immediately call another method on that result
+        const items = numbers
+            .filter(n => n >= 0)
+            .map(n => ({ value: n}) ); // best convention is to start the chain on a new line
+
+        console.log(items);
+
+        // Now you can go nuts chaining methods, because whatever method returns an array, you can chain another
+        // method to, like: 
+        const numbers = [1, -1, 2, 3];
+
+        const items = numbers
+        .filter(n => n >= 0)  // returns: [1, 2, 3]
+        .map(n => ({ value: n}) ) // returns an array with 3 objects
+        .filter(obj => obj.value > 1) // returns an array with 2 objects (removes the one with value: 1)
+        .map(obj => obj.value); // returns [2, 3]
+    console.log(items);
+
+    // Reducing an array
+
+    const numbers = [1, -1, 2, 3];
+
+    // Previously we would calculate the sum of all the numbers in this array like this:
+
+    // let sum = 0;
+    // for (let n of numbers)
+    //     sum += n;
+
+    //     console.log(sum); // Outputs: 5
+
+    // To do  this using the reduce() method - it takes two arguments
+
+// What happens with the reduce method, round by round (a = accumulator, c = currentValue)
+
+// round 1 -  a = 0, c = 1 => a = 1
+// round 2 -  a = 1, c = -1 => a = 0
+// round 3 -  a = 0, c = 2 => a = 2
+// round 4 -  a = 2, c = 3 => a = 5
+
+   const sum = numbers.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue;
+    }, 0); // the second argument to the .reduce() method, you pass the initial value you want the accumulator to be
+
+    console.log(sum);
+
+// The accumulator parameter is like the sum variable above.
+// Each loop over the element in the array, the element will be the currentValue and it will be added to the accumulator.
+// Returns a single value
+
+    // Refactor!
+        // Exclude the accumulator (it will then be set to the first element's value)
+        // Remove the return keyword because we have a single line and we only return a value
+        // Remove the curly braces and put everything on one line
+    const numbers = [1, -1, 2, 3];
+
+    const sum = numbers.reduce(
+        (accumulator, currentValue) => accumulator + currentValue
+    );
+
+    console.log(sum);
+  */
 
 
 
