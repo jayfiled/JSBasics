@@ -2273,13 +2273,101 @@ const filtered = numbers.filter(n => n >= 0 );
     );
 
     console.log(sum);
-  */
 
 
+// Exercise
+    // Create a function that has two parameters; a minimum number, and a maximum number.
+    // The function will return all the numbers inclusive and in between the minumum and maximum number to an array.
 
+    // My effort:
+function arrayFromRange(min, max) {
+    const range = [];
+    for (let i = min; min <= max; min++) {
+        range.push(min);
+    };
+    return range;
+};
+  
+const numbers = arrayFromRange(500, 1230);
 
+console.log(numbers);
 
-   
+    // Written cleaner:
+
+function arrayFromRange(min, max) {
+    const range = [];
+    for ( let i = min; i <= max; i++)
+        range.push(i)
+    return range;
+};
+
+const numbers = arrayFromRange(-23, 4);
+
+console.log(numbers);
+ 
+
+  // Exercise
+    // Write a function that does the exact same thing as the .includes() method.  It is called 'includes' and has two 
+    // parameters; 'array' and 'searchElement'
+        //  const numbers = [1, 2, 3, 4];
+        // console.log(numbers.includes(1)); // Outputs: True
+  
+// My effort
+  function includes(array, searchElement) {
+    for (let i = 0; i <= array.length; i++) {
+        if (array[i] === searchElement)
+            return true;
+    }
+    return false;
+  };
+
+console.log(includes(numbers, 5));
+
+// Cleaner
+
+const numbers = [1, 2, 3, 4];
+
+function includes(array, searchElement) {
+    for (let i = 0; i <= array.length; i++)
+    if (i === searchElement)
+        return true;
+    return false;
+}
+
+console.log(includes(numbers, 2));
+
+ */
+
+ // Exercise
+    // Create a function that takes two parameters, one is a (pre-defined) array, the other is an array of numbers
+    // you would like to be excluded from the first parameter array.
+        // It should return the predefined array minus the number(s) you defined in the second parameter
+
+// My effort #1:
+    const numbers = [1, 2, 3, 4, 1, 1, 1, 1, 1, 1, 5, 10];
+
+function except(array, excluded) {
+    // array for output
+    const arrOut = [];
+
+    // check every element in the numbers array
+    for (let i = 0; i < array.length; i++) {
+
+        // do a check to see if either of the given array elements matches the numbers array elements
+        for (let j = 0; j < excluded.length; j++) {
+            if (excluded[j] !== array[i])
+                arrOut.push(array[i]);
+        }
+    }
+        return arrOut;
+};
+
+    const output = except(numbers, [1, 2]);
+
+    console.log(output); // It returns: [2, 3, 4, 1, 5, 10]  :-S
+
+// Hint: Use array loops (for-of) and array methods to mutate the new array
+
 
 
 
