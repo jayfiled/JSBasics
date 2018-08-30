@@ -2336,55 +2336,125 @@ function includes(array, searchElement) {
 
 console.log(includes(numbers, 2));
 
- */
-
  // Exercise
     // Create a function that takes two parameters, one is a (pre-defined) array, the other is an array of numbers
     // you would like to be excluded from the first parameter array.
         // It should return the predefined array minus the number(s) you defined in the second parameter
 
-// My effort #1:
-    const numbers = [1, 2, 3, 4, 1, 1, 1, 1, 1, 1, 5, 10];
+// My effort:
+const numbers = [1, 2, 3, 4, 1, 1, 1, 1, 1, 1, 5, 10];
 
-function except(array, excluded) {
-    // array for output
-    const arrOut = [];
+function except(array, exclude) {
+    const outputArr = [];
+    // Loop over the array
 
-    // check every element in the numbers array
-    for (let i = 0; i < array.length; i++) {
+    for (let element of array) {
+            // Check each element against each element from the exlude array
+        if (exclude.every(value => value !== element))
+        // make a new array without them
+            outputArr.push(element); 
+    };
 
-        // do a check to see if either of the given array elements matches the numbers array elements
-        for (let j = 0; j < excluded.length; j++) {
-            if (excluded[j] !== array[i])
-                arrOut.push(array[i]);
-        }
-    }
-        return arrOut;
+    return outputArr;// array minus the numbers from the 'exclude' array
 };
 
-    const output = except(numbers, [1, 2]);
+const output = except(numbers, [1, 2, 3, 4, 5, 10]);
 
-    console.log(output); // It returns: [2, 3, 4, 1, 5, 10]  :-S
+console.log(output);
 
 // Hint: Use array loops (for-of) and array methods to mutate the new array
 
 
+// Another way (this doesn't return the expected outcome, but it is an interesting conclusion)
+
+const numbers = [1, 2, 3, 5, 7, 11];
+
+function exclude(array, excludedNum) {
+    const outArr = [];
+
+    for (let index in array) // Mistakenly used a for-in loop which checks the index, not the value of the index like for-of
+        if (!excludedNum.includes(index)) // index isn't a number, so this returns 'not-equal true' and pushes the index to outArr
+        outArr.push(index);
+    return outArr; // Interestingly the indices are added to the array as strings
+
+};
+
+const output = exclude(numbers, [1, 3]); 
+
+console.log(output); // returns: ['0', '1', '2', '3', '4', '5']
+ 
+// Another way (this way works as expected)
+
+const numbers = [1, 2, 3, 5, -1, 10];
+
+function exclude(array, excluded) {
+    const outArr = [];
+
+    for (let element of array)
+    if (!excluded.includes(element))
+        outArr.push(element)
+    return outArr;
+};
+
+output = exclude(numbers, [1, 3, 10]);
+
+console.log(output);
 
 
 
+// Exercise - move an element
+    // Create a function that takes 3 parameters; an array, an index and an offset. 
+    // The function should move the element at the given index for the given offset value.
+    // i.e. if you have index = 1 and offset = 2, then the function will move the element at
+    // index 1 two places down to index 3 and return the modified, new array.
+        // If your offset is too large or too.. small that it can't move to that
+        // index, then you display an error on the console "Invalid offset".
 
+    const numbers = [1, 2, 3, 4, 5, 6];
 
+function move(array, index, offset) {
+    // Logical check to see if the offset is valid
+    const position = index + offset;
+    
+    if (position > array.length || position < 0) {
+        console.error('Invalid Offset');
+        return;
+    }
+// Else
+    // Copy the array to modify
+    const outArr = [...array];
 
+    // Get the element at the specified index
+    const moveMe = outArr.splice(index, 1);
+    outArr.splice(position, 0, moveMe[0]);
 
+    // Return the modified array
+    return outArr;
 
+};
 
+const output = move(numbers, 1, 3); // Expect: [1, 2, 3, 5, 6, 4]
 
+console.log(output);
 
+*/
 
+// Excercise
+    // Create a function that takes two parameters; one is an array of numbers, and the other is another number
+    // The function will return the amount of times the search element appears in the passed in array
+    
 
+const numbers = [1, 2, 3, 4, 1];
 
+function countOccurrences(array, searchElement) {
 
+};
 
+const count = countOccurrences(numbers, 1);
+
+console.log(count);
+
+    // Increased difficulty - try achieving the same but using the .reduce() method.
 
 
 
