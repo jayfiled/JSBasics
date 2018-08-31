@@ -2444,13 +2444,20 @@ console.log(output);
     // The function will return the amount of times the search element appears in the passed in array
     
 
-const numbers = [1, 2, 3, 4, 1];
+const numbers = [1, 2, 3, 4, 1, 4, 2, 4, 5]; // 2 * 1, 2 * 2, 1 * 3, 3 * 4, 1 * 5
 
 function countOccurrences(array, searchElement) {
+    // make a counter
+    let counter = 0;
 
+    for (element of array) {
+        if (element === searchElement)
+        counter += 1;
+    }
+    return counter;
 };
 
-const count = countOccurrences(numbers, 1);
+const count = countOccurrences(numbers, -1);
 
 console.log(count);
 
