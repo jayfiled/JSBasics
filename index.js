@@ -2478,17 +2478,23 @@ function countOccurences(array, numToCount) {
 
 
 // Exercise - get max
-    // Create a function that returns the highest number in an array
-*/
+    // Create a function that returns the highest number in an array argument
+    // If the array argument is an empty array, return undefined
 
-    const numbers = [1, 2, 3, 4, 5];
+
+
+const numbers = [1, 5, 4, 3, 2, 9];
 
 function getMax(array) {
-    // check each number in the array
+    if (array.length === 0) return undefined; // By convention, if the IF statement has one line after
+                                                // put in on the same line
+    let max = array[0]; 
+// iterate the array and if you find a number larger than the first element, set max to that.
+    for (let i = 1; i < array.length; i++)
+        if (array[i] > max)
+            max = array[i];
 
-    // compare them against each other
-
-    // return the highest number
+    return max;
 }
 
     max = getMax(numbers);
@@ -2498,10 +2504,71 @@ function getMax(array) {
 
 // Exercise - get max - increased difficulty
     // Create a function that returns the highest number in an array
+ 
+// My effort
+
+   const numbers = [1, 3, 2, 9, 5, 6, 14, 10];
+
+function getMax(array) {
+    if (array.length === 0) return undefined;
+    
+    return array.reduce((accumulator, current) => {
+        if (current > accumulator)
+            accumulator = current;
+        return accumulator;
+    },0);
+
+}
+
+   const max = getMax(numbers);
+
+   console.log(max);
+
+// refactored
+
+const numbers = [1, 3, 4, 5];
+
+function getMax(array) {
+    if (array.length === 0) return undefined;
 
 
 
+   return array.reduce((accumulator, current) => {
+        if (current > accumulator) return current;
+        return accumulator;
+        // whatever value is returned will be the value of accumulator in the next round
+    });
+// Round by round commentry:
+    // 3 > 1 ? yes, return 3
+    // 3 > 4 ? no, return 4
+    // 4 > 5 ? no, return 5
+    // array.reduce will return 5
+}
 
+max = getMax(numbers);
 
+console.log(max);
 
+// Mecha-refactor!
+    // I'll just write the refactored reduce() method
+        return array.reduce((a, b) => (a > b) ? a : b);
+    // Swap the arguments to one letter, change the conditional to a ternary operator.
+*/
 
+// Exercise 7 - Movies
+    // Write code to get:
+        // All the movies in 2018 with rating > 4
+        // Sort them by their rating
+        // Descending order
+        // Show their title
+
+    // Expected outcome:
+        // 'b'
+        // 'a'
+
+    const movies = [
+        { title: 'a', year: 2018, rating: 4.5 },
+        { title: 'b', year: 2018, rating: 4.7 },
+        { title: 'c', year: 2018, rating: 3 },
+        { title: 'd', year: 2017, rating: 4.5 }
+    ];
