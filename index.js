@@ -2437,7 +2437,7 @@ const output = move(numbers, 1, 3); // Expect: [1, 2, 3, 5, 6, 4]
 
 console.log(output);
 
-*/
+
 
 // Excercise
     // Create a function that takes two parameters; one is an array of numbers, and the other is another number
@@ -2461,7 +2461,22 @@ const count = countOccurrences(numbers, -1);
 
 console.log(count);
 
-    // Increased difficulty - try achieving the same but using the .reduce() method.
+    // Exercise - .reduce() - Increased difficulty - try achieving the same but using the .reduce() method.
+*/
+
+    const numbers = [1, 2, 3, 4, 5, 1, -1, 3, 2];
+
+function countOccurences(array, numToCount) {
+    return array.reduce((accumulator, currentValue) => {
+        const occurence = (numToCount === currentValue) ? 1 : 0;
+        return accumulator + occurence;
+    }, 0); // The function in the reduce method returns accumulator
+            // you can't add directly assign values to accumulator, but you can create
+}           // another const and return them concatenated
+    output = countOccurences(numbers, 3);
+
+    console.log(output);
+
 
 
 
