@@ -2462,7 +2462,6 @@ const count = countOccurrences(numbers, -1);
 console.log(count);
 
     // Exercise - .reduce() - Increased difficulty - try achieving the same but using the .reduce() method.
-*/
 
     const numbers = [1, 2, 3, 4, 5, 1, -1, 3, 2];
 
@@ -2478,10 +2477,27 @@ function countOccurences(array, numToCount) {
     console.log(output);
 
 
+// Exercise - get max
+    // Create a function that returns the highest number in an array
+*/
+
+    const numbers = [1, 2, 3, 4, 5];
+
+function getMax(array) {
+    // check each number in the array
+
+    // compare them against each other
+
+    // return the highest number
+}
+
+    max = getMax(numbers);
+
+    console.log(max);
 
 
-
-
+// Exercise - get max - increased difficulty
+    // Create a function that returns the highest number in an array
 
 
 
