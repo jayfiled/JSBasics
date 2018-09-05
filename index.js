@@ -2553,7 +2553,7 @@ console.log(max);
     // I'll just write the refactored reduce() method
         return array.reduce((a, b) => (a > b) ? a : b);
     // Swap the arguments to one letter, change the conditional to a ternary operator.
-*/
+
 
 // Exercise 7 - Movies
     // Write code to get:
@@ -2574,30 +2574,45 @@ console.log(max);
     ];
 
     const testArr = movies.reverse();
-
-    console.log('Test: ', testArr);
+// My effort
 
 function getGoodMovies(array) {
 // new array to manipulate
     const manipMe = [ ...array ];
-// Sort in descending order
+// Sort in descending order by rating
     manipMe.sort((a, b) => {
-        if (a.rating > b.rating) return 1; // if first element is larger, swap.
-        if (a.rating < b.rating) return -1; // if first element is smaller, leave
+        if (a.rating > b.rating) return -1; // if first element is larger, swap.
+        if (a.rating < b.rating) return 1; // if first element is smaller, leave
         return 0; // else to nothing 
     }); // works
 
-// Sort by rating
-    manipMe.sort();
-
 // reduce the array to 2018 movies with rating > 4
-    array.reduce((a, c) => {
 
-    }, 0);
+for (let element of manipMe)
+    if (element.year !== 2018 || element.rating < 4)
+    manipMe.splice(manipMe.indexOf(element), 1);
 
 // return the name of the movies in the array
+
+const result = [];
+
+for (let element of manipMe)
+    result.push(element.title)
+
+    return result;
 }
 
     const goodMovies = getGoodMovies(movies);
 
     console.log(goodMovies);
+*/
+
+// Challenge: Refactor using .filter(), .sort() .reverse() and .map()
+
+const movies = [
+    { title: 'a', year: 2018, rating: 4.5 },
+    { title: 'b', year: 2018, rating: 4.7 },
+    { title: 'c', year: 2018, rating: 3 },
+    { title: 'd', year: 2017, rating: 4.5 }
+];
+
