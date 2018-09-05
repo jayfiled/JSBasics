@@ -2559,7 +2559,7 @@ console.log(max);
     // Write code to get:
         // All the movies in 2018 with rating > 4
         // Sort them by their rating
-        // Descending order
+        // Descending order (movies with a higher rating should come first)
         // Show their title
 
     // Expected outcome:
@@ -2572,3 +2572,32 @@ console.log(max);
         { title: 'c', year: 2018, rating: 3 },
         { title: 'd', year: 2017, rating: 4.5 }
     ];
+
+    const testArr = movies.reverse();
+
+    console.log('Test: ', testArr);
+
+function getGoodMovies(array) {
+// new array to manipulate
+    const manipMe = [ ...array ];
+// Sort in descending order
+    manipMe.sort((a, b) => {
+        if (a.rating > b.rating) return 1; // if first element is larger, swap.
+        if (a.rating < b.rating) return -1; // if first element is smaller, leave
+        return 0; // else to nothing 
+    }); // works
+
+// Sort by rating
+    manipMe.sort();
+
+// reduce the array to 2018 movies with rating > 4
+    array.reduce((a, c) => {
+
+    }, 0);
+
+// return the name of the movies in the array
+}
+
+    const goodMovies = getGoodMovies(movies);
+
+    console.log(goodMovies);
