@@ -2616,3 +2616,10 @@ const movies = [
     { title: 'd', year: 2017, rating: 4.5 }
 ];
 
+const newArr = movies
+    .filter(movies => movies.year === 2018 && movies.rating > 4)
+    .sort((a, b) => a.rating - b.rating)
+    .reverse()
+    .map(n => n.title);
+
+console.log(newArr); // Outputs ['b', 'a']
