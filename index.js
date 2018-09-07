@@ -2605,7 +2605,7 @@ for (let element of manipMe)
     const goodMovies = getGoodMovies(movies);
 
     console.log(goodMovies);
-*/
+
 
 // Challenge: Refactor using .filter(), .sort() .reverse() and .map()
 
@@ -2623,3 +2623,64 @@ const newArr = movies
     .map(n => n.title);
 
 console.log(newArr); // Outputs ['b', 'a']
+
+
+// Functions
+
+    // Function declarations vs function expressions
+
+        // Function declaration
+    function walk() {
+        console.log('Walk');
+    }
+
+    // Function Expression
+        // Functions are objects, so setting the run variable is similar to 
+        // setting the run variable to an object.
+// If the function doesn't have a name (like below), it is an anonymous function expression
+// If it has a name, i.e. function run() {}; - it is a Named Function Expression
+    let run = function() {
+        console.log('run')
+    }; // because we are declaring a variable or constant (run), we terminate with a semi-colon
+    // Now run, *will reference* the anonymous function, and we can call the 
+    // anonymous run function, using this reference:
+     // run(); // the same way we call a function in JavaScript
+     // if you declare another variable and set it to the variable 'run', it will reference the same 
+     // anonymous function (which is one object) in memory. 
+     // so move(); works
+
+*/
+// Hoisting
+    // The key difference between function declarations and expressions is that you can call the
+    // declaration before it is defined, i.e.
+
+    walk();
+    function walk() {
+        console.log('walk');
+    } // Outputs: Walk
+
+// compared to:
+
+run()
+const run = function() {
+    console.log(run);
+}; // Outputs: Uncaught ReferenceError: run is not defined at index.js:2663
+
+// Explanation: 
+    // It is like using a variable or constant before it is defined, i.e:
+        console.log(x);
+        let x = 1; // Outputs: Uncaught ReferenceError: x is not defined at index.js:2671
+    
+    // This is because the JS engine, when it executes the code, it moves all the function
+    // declarations to the top (of the file), so the code will actually look like this at runtime:
+    function walk() {
+        console.log('walk');
+    }
+    walk();
+    // This process is called 'hoisting'
+
+// Arguments
+
+
+
+
