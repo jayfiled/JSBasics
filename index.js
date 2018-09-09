@@ -2649,7 +2649,7 @@ console.log(newArr); // Outputs ['b', 'a']
      // anonymous function (which is one object) in memory. 
      // so move(); works
 
-*/
+
 // Hoisting
     // The key difference between function declarations and expressions is that you can call the
     // declaration before it is defined, i.e.
@@ -2680,7 +2680,171 @@ const run = function() {
     // This process is called 'hoisting'
 
 // Arguments
+    // Arguments are dynamic, like variables, objects etc; you can reinitialize them, change their type, etc.
+// For example, in JS, even if your function takes two parameters, you can pass it one argument and it won't error
+// but you will get unexpected results. i.e:
+
+function sum(a, b) {
+    return a + b;
+}
+
+console.log(sum(1)); // Output: NaN - the 'b' parameter will be 'undefined' - 1 + undefined => NaN
+
+// Similarly, if you pass more than one argument, in the above's case, only the first
+// two arguments will be passed.
+console.log(sum(1, 2, 3, 4, 5)); // Outputs 3.
+
+// However, to accomodate this, JavaScript functions have a special object called 
+// *arguments* - which looks like an array, and it's key value pairs are all the values 
+// passed in as arguments and their index. It also has properties: 'callee', length & symbol.
 
 
+function sum(a, b) {
+    console.log(arguments)
+    return a + b;
+}
+
+console.log(sum(1, 2, 3, 4, 5, 6)); // Logs the arguments object and also the result of a + b.
 
 
+// You can work with this arguments object.  The object properties say that this object is iterable, so
+// you can use a for-of loop that you use for arrays. i.i:
+
+function sum() { // You can remove the parameters because we are working with the arguments object
+    let total = 0;
+    for (let value of arguments)
+        total += value;
+    return total;
+
+}
+
+console.log(sum(1, 2, 3, 4, 5, 10));
+
+
+// The rest operator - a better way to do the above.
+    // For funtions with a varying number of operators, use within the function's parameters, liek: '...args'
+
+    function sum(...args) {
+        console.log(args);
+
+    }
+console.log(sum(1, 2, 3, 4, 5)); // Outputs the arguments as an array. if you leave out the ..., it will just 
+                                // print out the first argument, in this case: 1.
+// Tip: So, now you can use array methods to use the args array, like reduce() etc so your code is cleaner and more
+// elegant. i.e:
+
+// Objective: Print the total of the arguments passed in.
+function sum(...args) {
+    return args.reduce((a, b) => a + b);
+}
+
+console.log(sum(1, 2, 3, 4, 5, 10));
+
+// Lets expand upon it's functionality
+// Objective: Use this function to calculate the total amount of items in a shopping cart, with a discount factor.
+
+function sum(discount, ...prices) {
+    const total = prices.reduce((a, b) => a + b)
+    return total * (1 - discount); // 90% of the total is a 10% discount :'D
+}
+
+console.log(sum(0.1, 20, 30));
+// Note: the rest parameter must be the last parameter or you get uncaught syntax error
+
+
+// Default Parameters
+    // When you want to supply a 'default' value to a parameter, where the value hasn't been specified in an argument
+    // i.e:
+
+// The traditional way:
+    function interest(principal, rate, years) {
+        rate = rate || 3.5; // If rate has a value - if it is 'truthy', use that, or use 3.5.
+        years = years || 5; 
+        return principal * rate / 100 * years;
+    }
+
+    console.log(interest(10000)); // You can pass in all the arguments, or leave them out as we have defaults set in the func
+
+// The ES6 (modern way)
+    // Set them within the parameter
+    function interest(principal, rate = 3.5, years = 5) {
+        return principal * rate / 100 * years;
+    }
+
+    console.log(interest(10000));
+// the caveat:
+    // Once you define a default for a parameter, you need to define one for all the ones following, or the following happens:
+
+    function interest(principal, rate = 3.5, years) {
+        return principal * rate / 100 * years;
+    }
+
+    console.log(interest(10000)); // Outputs: NaN because the years parameter isn't set, so it is undefined.
+    // Even if you enter a second argument to interest(), the JS engine doesn't know if it should be used for 
+    // rate or years. So, console.log(10000, 5) will also be NaN
+    // Tip/Trick/bad practice: You can pass undefined as the second argument if you want, console.log(10000, undefined, 5)
+    // but if you use defaults in the params, then only set it on the last, or every parameter thereafter should
+    // also have defaults set. 
+
+
+// Getters and Setters
+    // A special kind of method in objects
+
+    // The problem getter and setters solves:
+// If we want to display someone's full name in our program, we'd get it from an object
+// using the `${}` template literal syntax:
+const person = {
+    firstName: 'Joel',
+    lastName: 'James'
+};
+
+console.log(`${person.firstName} ${person.lastName}`); // But we would have to repeat that every time we want to display
+// the person's full name eveywhere in our application.
+
+// TIP: If we structure our objects like this, we can improve the repetition:
+    // Define a method called fullName in the object, return the expression we used in the above console.log and whenever we need
+    // to use the persons full name, just reference the .fullName() method in the person object.
+
+const person = {
+    firstName: 'Joel',
+    lastName: 'James',
+//  function fullName() {};     // This is a way to do it, but in ES6, you can just use the function's name
+    fullName() {
+        return `${person.firstName} ${person.lastName}`;
+    }
+};
+
+console.log(person.fullName()); // Outputs: Joel James
+// There is still a problem with this as we are only able to *read* the properties from the person object.
+// In a proper application, we'd need to be able to change these properties. i.e:
+person.fullName = 'Josh Jameson'; // wouldn't work in it's current state.
+// AND ideally, we would like to be able to call the full name without using the method syntax, like:
+console.log(person.fullName);
+*/
+// Enter GETTERS and SETTERS !
+    // getters => access properties
+    // setters => change (mutate) them
+
+const person = {
+    firstName: 'Joel',
+    lastName: 'James',
+    get fullName() { // write 'get' next to the method name
+        return `${person.firstName} ${person.lastName}`
+    },
+    set fullname(value) { // value will be whatever is on the right hand side of the assignment operator
+        // split the string, take the parts and set the firstName, lastName properties
+        const parts = value.split(' '); // returns an array
+        this.firstName = parts[0];
+        this.lastName = parts[1];
+    }
+};
+
+console.log(person.fullName); // Now we can access the fullName like a property
+
+person.fullName = 'Josh Jameson';
+
+console.log(person); // You'll see firstName and lastName properties will be updated
+// you'll also see that fullName is (...), hover over and the tooltip will tell you that it is a getter method
+// and to click to invoke.
+
+// Error Handling
