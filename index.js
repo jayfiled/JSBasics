@@ -2820,7 +2820,7 @@ console.log(person.fullName()); // Outputs: Joel James
 person.fullName = 'Josh Jameson'; // wouldn't work in it's current state.
 // AND ideally, we would like to be able to call the full name without using the method syntax, like:
 console.log(person.fullName);
-*/
+
 // Enter GETTERS and SETTERS !
     // getters => access properties
     // setters => change (mutate) them
@@ -2848,3 +2848,49 @@ console.log(person); // You'll see firstName and lastName properties will be upd
 // and to click to invoke.
 
 // Error Handling
+    // The above is all well and good, but what if we entered an unexpected type into the person.fullName?
+person.fullName = true; // Outputs error: Uncaught type exception - split is a method that belongs to strings. Also:
+person.fullName = null; // Outputs TypeError: Cannot read property ... of null
+*/
+// We need error handling
+    // Typically in situations like this, do error handing at the beginning of a function or method, called:
+    // **Defensive programming** - checking that the values coming in are valid, that they are in the right 
+    // format to execute our logic. i.e:
+
+    const person = {
+        firstName: 'Joel',
+        lastName: 'James',
+        get fullName() {
+            return `${person.firstName} ${person.lastName}`;
+        },
+        set fullName(value) {
+            if (typeof value !== 'string') // return; // This will return with no error
+            throw new Error('Value is not a string.'); // throw keyword, create a new Error object (Pascal-case signifies the constructor function)
+                // if we throw an error, we need to catch it in the same place that called the exception
+
+            const parts = value.split(' ');
+// Obviously, there are still ways for other errors to slip through, like if we pass an empty string (it's still a string)
+            if (parts.length !== 2) // you get an empty string as a firstName and undefined as a lastName.
+            throw new Error('Enter a first and last name'); // We can throw another exception:
+
+            this.firstName = parts[0];
+            this.lastName = parts[1];
+        }
+    }
+try {
+    person.fullName = ''; // We need to 'throw' an exception. An Error object used with 'throw' is called an *Exception*
+}
+catch (e) { // the error parameter is the Error object we made in the setter function.
+    alert(e); // Outputs an alert pop-up in the browser. We can also: console.log(e); or display some text to the user
+}
+
+console.log(person);
+
+
+
+
+
+
+
+
+
