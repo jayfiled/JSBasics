@@ -2851,7 +2851,7 @@ console.log(person); // You'll see firstName and lastName properties will be upd
     // The above is all well and good, but what if we entered an unexpected type into the person.fullName?
 person.fullName = true; // Outputs error: Uncaught type exception - split is a method that belongs to strings. Also:
 person.fullName = null; // Outputs TypeError: Cannot read property ... of null
-*/
+
 // We need error handling
     // Typically in situations like this, do error handing at the beginning of a function or method, called:
     // **Defensive programming** - checking that the values coming in are valid, that they are in the right 
@@ -2887,10 +2887,80 @@ catch (e) { // the error parameter is the Error object we made in the setter fun
 console.log(person);
 
 
+// Local Vs Global Scope
+    // Let and Const variables can only be accessed in the block in which 
+    // they are defined.
+// The below could be a function, conditional or loop code block 
+{
+    const message = 'hi';
+}
+
+console.log(message); // Uncaught ReferenceError: message is not defined
+
+// Same applies to code blocks within other code blocks like:
+
+function start() {
+    const message = 'hi';
+
+    if (true) {
+        const another = 'bye';
+    }
+    console.log(another) // Outputs: Uncaught ReferenceError: another is not defined.
+}
+
+start();
+// Which means things that look like duplicates, can actually be valid JS:
+
+function start() {
+    const message = 'hi';
+}
+
+function stop() {
+    const message = 'bye';
+}
+
+start(); // Outputs: 'hi'
+
+    // Global scope
+        // Available everywhere
+            // But are overwritten by locally scoped variables with the same name
+const color = 'red';
+
+    function start() {
+        const message = 'hi';
+        const color = 'blue';
+        console.log(color); // Outputs 'blue' because locally scoped variables have a higher
+    }                       // precedence.
+
+    function stop() {
+        const message = 'bye';
+    }
+
+start();
+    // Takeaway: Don't declare const or variables in the global scope
+    // Because they can be overwritten in other functions and can cause bugs and issues.
 
 
 
+// Let vs Var
+    // Problems with var and why you should avoid it.
 
+let x = 0;
+var y = 0;
+*/
 
+function start() {
+    for (let i = 0; i < 5; i++)
+        console.log(i);
 
+    console.log(i); // Outputs: 0, 1, 2, 3, 4 from internal code block, then i is 5, but
+};                  // outputs Uncaught ReferenceError: i is not defined.
 
+// with var instead:
+
+function start() {
+    for (var i = 0; i < 5; i++)
+        console.log(i)
+    
+    console.log(i); // Outputs 1 - 4 from inside (loop) block, and 5 from external (function) block
+}
