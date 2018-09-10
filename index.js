@@ -2940,17 +2940,20 @@ start();
     // Takeaway: Don't declare const or variables in the global scope
     // Because they can be overwritten in other functions and can cause bugs and issues.
 
-
-
 // Let vs Var
     // Problems with var and why you should avoid it.
+        // 1. Var - It's scope is not limited to the block in which it is defined - but the *function*
+        // in which it's defined.
+        // 2. When you declare a var variable, it global and attached to the window object.  Because there is 
+        // only one window object, if you work with a 3rd party library, it may have a var with the 
+        // same name as your var and it will cause a conflict.
 
 let x = 0;
 var y = 0;
-*/
+
 
 function start() {
-    for (let i = 0; i < 5; i++)
+    for (let i = 0; i < 5; i++) // the curly braces code block is still here, just not needed
         console.log(i);
 
     console.log(i); // Outputs: 0, 1, 2, 3, 4 from internal code block, then i is 5, but
@@ -2963,4 +2966,40 @@ function start() {
         console.log(i)
     
     console.log(i); // Outputs 1 - 4 from inside (loop) block, and 5 from external (function) block
+}                   // because var is defined within the start() function, it is available even
+                    // if it is within a code block.
+// This is a strange 'JavaScript' only feature.  Most of the other programming languages don't act like this
+
+// Recap: 
+    // var => function-scoped
+    // ES6 (ES2015): let, const => block-scoped
+
+// One more example:
+
+function start() {
+    for (var i = 0; i < 5; i++) {
+        if (true) {
+            var color = 'red';
+        }
+    }
+    console.log(red); // Output's 'red' as var is scoped to the function.
+ }
+*/
+// Other reason
+
+var color = 'red'; // var attaches color to the window object.
+let age = 30;
+
+console.log(window.color); // Output: 'red'
+
+// In the same regard as the var keyword, when you create a function, it is also attached to the window object
+// you can call it by window.functionName() after you've declared it.
+
+// This is bad practice and the way to seperate them is to ensapsulate them in modules 
+function sayHi() {
+    console.log('hi');
 }
+
+// Takeaway: Avoid using the var keyword, because they are function scoped, not block scoped.
+
+// The 'this' keyword
