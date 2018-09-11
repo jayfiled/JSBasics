@@ -2984,7 +2984,7 @@ function start() {
     }
     console.log(red); // Output's 'red' as var is scoped to the function.
  }
-*/
+
 // Other reason
 
 var color = 'red'; // var attaches color to the window object.
@@ -3003,3 +3003,44 @@ function sayHi() {
 // Takeaway: Avoid using the var keyword, because they are function scoped, not block scoped.
 
 // The 'this' keyword
+
+// Explanation
+    // This THIS keyword is referencing the object that executing the current function
+    // Methods are functions in an object
+    // 1. If the THIS keyword is within a method, the THIS keyword references that object itself
+    // 2. Else if the THIS keyword is within a function, then the THIS keyword references the global
+    // (window in browsers, global in Node) object
+// For example:
+*/
+const video = {
+    title: 'a',
+    play() {
+        console.log(this);
+    }
+};
+
+//video.play(); // Outputs: {title: 'a', play: f}
+
+video.stop = function() {
+    console.log(this);
+};
+
+video.stop(); // Outputs: {title: 'a', play: f play(), stop: f () }
+
+// Whereas, if you create a function outside the object:
+
+function playVideo() {
+    console.log(this);
+}
+
+playVideo(); // You see the window object in the browser, or the global object in node
+
+// if you use a constructor function:
+
+function Video(title) {
+    this.title = title;
+    console.log(this);
+}
+
+const v = new Video('b'); // New opererator creates a new empty object in the background,
+                            //like {}, so this is referencing that new object
