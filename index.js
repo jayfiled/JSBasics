@@ -3074,9 +3074,9 @@ video.showTags(); // Outputs: undefined 'a', undefined 'b', undefined 'c'
 
 
 // Changing this
-*/
+
 // 2. Inside the method, but outside the callback function define a constant before the foreach()
-// method and call it 'this', i.e:
+// method and call it 'this' - this solution isn't recommended - i.e: 
 
 const video = {
     title: 'a',
@@ -3091,3 +3091,21 @@ const video = {
 
 video.showTags()
 
+*/
+// 3. apply() bind() and call()
+
+function playVideo(a, b) {
+    console.log(this);
+}
+
+// The call method on the playVideo object (remember functions are objects), takes a parameter - an object - that you want the 
+playVideo.call({ name: 'Joel' }, 1, 2); // THIS keyword to reference. You can also pass in arguments if the function
+                                        // you are calling has parameters.
+
+playVideo.apply({ name: 'Joel' }, [1, 2]) // difference between the two is you need to pass the args as an array
+
+const fn = playVideo.bind( {name: 'Joel' }) // This *doesn't* call the playVideo function.  It returns a new function
+                                    // and sets the THIS keyword to the object you pass in 
+fun();
+// or a cleaner way to write the fn() bind() combo is
+playVideo.bind({ name: 'Joel' })();
