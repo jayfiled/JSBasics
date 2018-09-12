@@ -3011,7 +3011,7 @@ function sayHi() {
     // 2. Else if the THIS keyword is within a function, then the THIS keyword references the global
     // (window in browsers, global in Node) object
 // For example:
-*/
+
 const video = {
     title: 'a',
     play() {
@@ -3044,3 +3044,50 @@ function Video(title) {
 
 const v = new Video('b'); // New opererator creates a new empty object in the background,
                             //like {}, so this is referencing that new object
+
+// One more example:
+
+const video = {
+    title: 'a',
+    tags: ['a', 'b', 'c'],
+    showTags() {
+        this.tags.forEach(function(tag) {
+            console.log(this.title, tag);
+        });
+    }
+};
+
+// I want to display the title and then the tags:
+
+video.showTags(); // Outputs: undefined 'a', undefined 'b', undefined 'c'
+// The 'this' keyword is within a regular callback function, which is within a method.  A function is actually 
+// a part of the window / global object, even when it is housed within a method as a part of an
+// object. The global object is the one that is executing the anonymous function
+
+// To solve this issue, there are a few options:
+
+// 1. The foreach() method takes a second argument - thisArg?.  Where you can pass an object, and the THIS
+// keyword will reference the object you've passed.  Because you are outside the callback function, you can pass
+// 'this' as the object, and you will reference it within the callback function.
+// Not all methods take an object as a second parameter to use, so
+// 2, 3, 4 and option 5 in the next section
+
+
+// Changing this
+*/
+// 2. Inside the method, but outside the callback function define a constant before the foreach()
+// method and call it 'this', i.e:
+
+const video = {
+    title: 'a',
+    tags: ['a', 'b', 'c', 'd'],
+    showTags() {
+        const self = this; // some people call it 'that'
+        this.tags.forEach(function(tag) {
+            console.log(self.title, tag);
+        })
+    }
+};
+
+video.showTags()
+
