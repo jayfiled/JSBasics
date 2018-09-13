@@ -3091,12 +3091,16 @@ const video = {
 
 video.showTags()
 
-*/
-// 3. apply() bind() and call()
+// 3. apply() bind() and call() - these function-object methods, 'call', or return a new function for you and allow you to customize
+// some default properties of that function-object by allowing you to pass in things you want
+//  to replace the default properties with. i.e:
 
-function playVideo(a, b) {
-    console.log(this);
-}
+const func = function playVideo(a, b) {
+    console.log(this.name);
+}.bind({name: 'Joel'});
+
+func();
+
 
 // The call method on the playVideo object (remember functions are objects), takes a parameter - an object - that you want the 
 playVideo.call({ name: 'Joel' }, 1, 2); // THIS keyword to reference. You can also pass in arguments if the function
@@ -3104,8 +3108,41 @@ playVideo.call({ name: 'Joel' }, 1, 2); // THIS keyword to reference. You can al
 
 playVideo.apply({ name: 'Joel' }, [1, 2]) // difference between the two is you need to pass the args as an array
 
-const fn = playVideo.bind( {name: 'Joel' }) // This *doesn't* call the playVideo function.  It returns a new function
+const fn = playVideo.bind( {name: 'Joel' }) // This *doesn't* call the playVideo function.  It returns a new *function*
                                     // and sets the THIS keyword to the object you pass in 
-fun();
+fn();
 // or a cleaner way to write the fn() bind() combo is
 playVideo.bind({ name: 'Joel' })();
+
+// So the playVideo object can now be refactored using the bind() method:
+
+const playVideo = {
+    title: 'a',
+    tags: ['a', 'b', 'c'],
+    showTags() {
+        this.tags.forEach(function(tag) {
+            console.log(this.title, tag);
+        }.bind(this));
+    }
+};
+
+playVideo.showTags();
+*/
+
+// However, ECMA Script 6 provides an even better way to to change the THIS keyword - using fat arrow functions.
+// When you use a fat arrow function, it automatically changes the reference of THIS, to *inherit* the THIS value
+// from the containing function.
+    // the playVideo object refactored:
+
+const playVideo = {
+    title: 'a',
+    tags: ['a', 'b', 'c'],
+    showTags() {
+        this.tags.forEach(tag => { // fat arrow inherits the THIS value from it's parent container - the playVideo object
+            console.log(this.title, tag);
+        })
+    }
+};
+
+playVideo.showTags(); // Outputs: a a, a b, a c
+
