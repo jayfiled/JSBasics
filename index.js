@@ -410,7 +410,7 @@ else {
     console.log('Hello World');
 
     // For loops
-        //Varible declaired inside the scope of the loop - it can't be referenced outside the loop
+        // Varible declared inside the scope of the loop - it can't be referenced outside the loop
 
 for (let i = 0; i < 5; i++ ) //initialExpression - i for initialize, anything ok | condition | increment expression
     console.log('Hello World') // statement // doesn't need a code block for one statement
@@ -2722,7 +2722,7 @@ console.log(sum(1, 2, 3, 4, 5, 10));
 
 
 // The rest operator - a better way to do the above.
-    // For funtions with a varying number of operators, use within the function's parameters, liek: '...args'
+    // For funtions with a varying number of operators, use within the function's parameters, like: '...args'
 
     function sum(...args) {
         console.log(args);
@@ -2831,7 +2831,7 @@ const person = {
     get fullName() { // write 'get' next to the method name
         return `${person.firstName} ${person.lastName}`
     },
-    set fullname(value) { // value will be whatever is on the right hand side of the assignment operator
+    set fullName(value) { // value will be whatever is on the right hand side of the assignment operator
         // split the string, take the parts and set the firstName, lastName properties
         const parts = value.split(' '); // returns an array
         this.firstName = parts[0];
@@ -3127,7 +3127,7 @@ const playVideo = {
 };
 
 playVideo.showTags();
-*/
+
 
 // However, ECMA Script 6 provides an even better way to to change the THIS keyword - using fat arrow functions.
 // When you use a fat arrow function, it automatically changes the reference of THIS, to *inherit* the THIS value
@@ -3145,4 +3145,97 @@ const playVideo = {
 };
 
 playVideo.showTags(); // Outputs: a a, a b, a c
+
+
+// Functions Exercise 1 - The sum of all arguments
+    // a. Create a function called sum() that takes a varying number of arguments and returns the sum
+        // i.e. sum(1, 2, 3, 4) Should output: 10
+    // b. Modify the function so that it can take an array and return the result
+        // Hint: to check whether an array is an array you use Array.isArray().  If an array is passed, it returns true.
+
+// My efforts
+
+// Solution 1. Using arguments. Arguments is an array-looking Object, so a for-in loop 
+function sum() {
+    argCounter = 0;
+    for (key in arguments)
+        argCounter += arguments[key];
+
+    return argCounter;
+    }
+
+const total = sum(1, 2, 3, 4, 10);
+
+console.log(total);
+
+// Solution 2. Using the REST operator. This is an array, so the reduce method should be fine
+
+function sum(...args) {
+    return args.reduce((a, c) => a + c);
+}
+
+console.log(sum([1, 2, 3, 4, 10]));
+
+// Solution 1.a
+
+// Working with the function arguments
+
+function sum() {
+    if (Array.isArray(arguments[0]))
+        return arguments[0].reduce((a, c) => a + c);
+
+let argTotal = 0;
+    for (key in arguments)
+        argTotal += arguments[key];
+
+    return argTotal;
+}
+
+console.log(sum(1, 2, 3, 4, 20));
+
+// Solution 2.a
+
+// Using the REST operator
+    // the rest operator passes an array.  So if an argument is an array, an array of arrays is passed.
+    // To get the sum, we need to flatten the structure
+function sum(...items) {
+    // need to check if the items array has a single element, and the first element is an array itself
+    if (items.length === 1 && Array.isArray(items[0]))
+    // then *reset* the items array to a new array
+        items = [...items[0]];
+// if / else resolves to true and continues
+        // now the items array has been reset, or 'flattened' so our reduce method will work
+return items.reduce((a, c) => a + c);
+}
+
+console.log(sum(1, 2, 3, 4));
+
+// Functions - Exercise 2 - The area of a circle.
+    // Create a circle object using the object literal syntax
+    // the object should have a radius property that we can read or write to, i.e. 
+    // You should be able to set circle.radius = 2;
+    // You should have an area property that is read only, i.e.
+    // circle.area = 20; should not change the object's area property, but you should be able to read it, i.e.
+    // console.log(circle.area); // Outputs: 20
+
+    const circle = {
+        radius: 1,
+        get area() {
+             return (this.radius * this.radius) * Math.PI;
+        }
+    };
+
+// Set the radius by simply assigning a new value to the radius key in the circle object 
+// circle.radius = 6;
+
+console.log(circle.area);
+
+// You can't change the area property like circle.area = 20; - if you log the circle.area after this, you'll 
+// get the original value
+*/
+// Functions - Exercise 3 - Error handling
+
+
+
+
 
