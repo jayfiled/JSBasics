@@ -1,4 +1,4 @@
-/*
+
 // --------- TOC --------- //
 
 // --------- BASICS --------- //
@@ -14,7 +14,7 @@
 // --------- FUNCTIONS --------- //
 
                         
----------------------------------------------------------------|
+//---------------------------------------------------------------|
 
 
 // --------- BASICS --------- //
@@ -920,7 +920,7 @@ console.log(calculateGrade(array));
     }
 
     showStars(5);
-
+/*
  ***Comprehension failure: *** 
 Q. I can't understand why the 'pattern' variable under the first
 'for' loop doesn't get reset to an empty string every time it is looped over.
@@ -934,7 +934,7 @@ then 2 is the amount of times the nested for.. loop will run before being being 
 as false (and logging that many stars).
 
 Stepped through it on python tutor which helped. https://goo.gl/d44gHV 
-
+*/
 function showStars(rows) {
  for (let row = 1; row <= rows; row++) {
      let pattern = '';
@@ -2864,7 +2864,7 @@ person.fullName = null; // Outputs TypeError: Cannot read property ... of null
             return `${person.firstName} ${person.lastName}`;
         },
         set fullName(value) {
-            if (typeof value !== 'string') // return; // This will return with no error
+            if (typeof value !== 'string') // return; // This will return with no error, or
             throw new Error('Value is not a string.'); // throw keyword, create a new Error object (Pascal-case signifies the constructor function)
                 // if we throw an error, we need to catch it in the same place that called the exception
 
@@ -3232,10 +3232,29 @@ console.log(circle.area);
 
 // You can't change the area property like circle.area = 20; - if you log the circle.area after this, you'll 
 // get the original value
-*/
+
 // Functions - Exercise 3 - Error handling
+    // If the first argument is not an array, throw an exception
+    // Then wrap the const count and the console.log() in a try block 
+    // and catch the exception and log it to the console
 
+const numbers = [1, 2, 1, 4];
 
+function countOccurences(array, searchElement) {
+    if (!Array.isArray(array)) // !array or array !=== array also works
+        throw new Error('Please enter an array');
 
+    return array.reduce((a, c) => {
+        const occurence = (c === searchElement) ? 1 : 0;
+        return a + occurence;
 
+    },0)
+}
 
+try {
+const count = countOccurences(null, 1);
+console.log(count);
+}
+catch (e) {
+    console.log(e.message);
+}
